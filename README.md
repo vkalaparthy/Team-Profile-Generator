@@ -18,7 +18,10 @@ Run app.js at the terminal  using the command node app.js and a series of questi
 
 ## Contributing
 ## Tests
-Employee.test.js, Manager.test.js, Engineer.test.js, Intern.test.js
+  Employee.test.js
+  Manager.test.js 
+  Engineer.test.js
+  Intern.test.js
 ## Questions
 * Vani Kalaparthy
   * https://github.com/vkalaparthy
