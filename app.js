@@ -136,10 +136,10 @@ async function init() {
             console.log("There is already a manager, can't create more");
         } else {
             const answers = await inquirer.prompt(mgrQuestions);
-            console.log(answers.name);
-            console.log(answers.id);
-            console.log(answers.email);
-            console.log(answers.officeNumber);
+            // console.log(answers.name);
+            // console.log(answers.id);
+            // console.log(answers.email);
+            // console.log(answers.officeNumber);
             const newMgr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             arrOfEmpl.push(newMgr);
         }
@@ -147,10 +147,10 @@ async function init() {
     } else if (member === "Engineer") {
         // ask employee related questions
         inquirer.prompt(engQuestions).then(answers => {
-            console.log(answers.name);
-            console.log(answers.id);
-            console.log(answers.email);
-            console.log(answers.githubUserId);
+            // console.log(answers.name);
+            // console.log(answers.id);
+            // console.log(answers.email);
+            // console.log(answers.githubUserId);
             const newEng = new Engineer(answers.name, answers.id, answers.email, answers.githubUserId);
             arrOfEmpl.push(newEng);
             wantToContinue();
@@ -158,10 +158,10 @@ async function init() {
     }
     else { // must be an Intern, so ask Intern related questions
         inquirer.prompt(internQuestions).then((answers) => {
-            console.log(answers.name);
-            console.log(answers.id);
-            console.log(answers.email);
-            console.log(answers.school);
+            // console.log(answers.name);
+            // console.log(answers.id);
+            // console.log(answers.email);
+            // console.log(answers.school);
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
             arrOfEmpl.push(newIntern);
             wantToContinue();
