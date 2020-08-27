@@ -12,7 +12,9 @@ This Application creates a html file for a team using the information provided b
 ## Installation
 This application is located at https://github.com/vkalaparthy/buildingTeam, clone this and run npm install to install all the packages that are used for this app.
 ## Usage
-Run app.js at the terminal  using the command node app.js and a series of questions will be asked to get the information about the team embers and their roles. The questions are based on employee role and after you are done with answering all question on CLI, using objects a html file for this team will be generated in output folder and the name of the html file will be team.html.  If there is no folder, this app will create a folder and create a team.html file.  If there is a already an existing team.html, this app will overwrite the file with new information.
+Run app.js at the terminal  using the command node app.js and a series of questions will be asked to get the information about the team embers and their roles. The questions are based on roles of the employees and this app does not let you create more than one manager.
+
+Answers collected from CLI interface are created as Objects and these objects render to html file for this team.  Generated "team.html" file is in output folder.  If there is no folder, this app will create a folder and create a team.html file.  If there is a already an existing team.html, this app will overwrite the file with new information.
 
 
 ![Image of image](./images/TeamBuilt.jpg)
