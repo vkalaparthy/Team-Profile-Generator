@@ -1,4 +1,4 @@
-# buildingTeam
+# Team Profile Generator
 
 ## Description
 This Application creates a html file for a team using the information provided by user for different roles of employees. Designed and developed using Object Oriented Concepts. It uses npm-inquirer for input and renders this information to a html file.
