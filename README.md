@@ -15,7 +15,7 @@ This application is located at https://github.com/vkalaparthy/buildingTeam, clon
 Run app.js at the terminal  using the command node app.js and a series of questions will be asked to get the information about the team embers and their roles. The questions are based on employee role and after you are done with answering all question on CLI, using objects a html file for this team will be generated in output folder and the name of the html file will be team.html.  If there is no folder, this app will create a folder and create a team.html file.  If there is a already an existing team.html, this app will overwrite the file with new information.
 
 
-![Image of image](./images/TeamCreated.jpg)
+![Image of image](./images/TeamBuilt.jpg)
 ## License
 
 ## Contributing
