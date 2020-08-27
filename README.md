@@ -10,7 +10,7 @@ This Application creates a html file for a team using the information provided b
 * [Tests](#tests)
 * [Questions](#questions)
 ## Installation
-This application is located at https://github.com/vkalaparthy/buildingTeam, clone this and run npm install to install all the packages that are used for this app.
+This application is located at https://github.com/vkalaparthy/Team-Profile-Generator, clone this and run npm install to install all the packages that are used for this app.
 ## Usage
 Run app.js at the terminal  using the command node app.js and a series of questions will be asked to get the information about the team embers and their roles. The questions are based on roles of the employees and this app does not let you create more than one manager.
 
