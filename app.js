@@ -11,6 +11,8 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer");
 const { inherits } = require("util");
 
+//const writeFileAsync = util.promisify(fs.writeFile);
+
 const validateTheResponse = async (input) => {
     if (input === "") {
        return 'Incorrect response!!';
@@ -48,7 +50,7 @@ const mgrQuestions = [
 const engQuestions = [
     {
         type: "input",
-        message: "Enter the name of the manager",
+        message: "Enter the name of the Engineer",
         name: "name",
         validate: validateTheResponse
     },
@@ -75,7 +77,7 @@ const engQuestions = [
 const internQuestions = [
     {
         type: "input",
-        message: "Enter the name of the manager",
+        message: "Enter the name of the Intern",
         name: "name",
         validate: validateTheResponse
     },
@@ -105,61 +107,111 @@ let moreEmp = true;
 
 async function init() {
 //while (moreEmp) {
-    const newEmployee = await inquirer.prompt([
-    {
-        type: "list",
-        message: "Select team member",
-        name: "member",
-        choices: ['Manager', 'Engineer', 'Intern']
-    }
+    const newEmployeeType = await inquirer.prompt([
+        {
+            type: "list",
+            message: "Select team member",
+            name: "member",
+            choices: ['Manager', 'Engineer', 'Intern']
+        }
+    ])
 
-    ]). then (resposne => {
-        console.log (resposne.member);
-        if (resposne.member === "Manager") {
-            // ask manager related questions
-            inquirer.prompt(mgrQuestions).then((answers) => {
+    console.log(newEmployeeType.member);
+
+    await askMoreQuestions(newEmployeeType.member);
+
+}
+
+ function askMoreQuestions(member) {
+
+    if (member === "Manager") {
+        // ask manager related questions
+        inquirer.prompt(mgrQuestions).then(answers => {
+            if (Manager.count === 1) {
+                console.log("There is already a manager, can't create more");
+            } else {
                 console.log(answers.name);
                 console.log(answers.id);
                 console.log(answers.email);
                 console.log(answers.officeNumber);
                 const newMgr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-                //render(newMgr);
-                console.log(newMgr);
-            });
-        } else if (resposne.member === "Engineer") {
-            // ask employee related questions
-            inquirer.prompt(engQuestions).then(answers => {
-                console.log(answers.name);
-                console.log(answers.id);
-                console.log(answers.email);
-                console.log(answers.githubUserId);
-                const newEng = new Engineer(answers.name, answers.id, answers.email, answers.githubUserId);
-            });
-        }
-        else { // must be an Intern, so ask Intern related questions
+                arrOfEmpl.push(newMgr);
+            }
+            wantToContinue();
+            //console.log(newMgr);
+        });
+    } else if (member === "Engineer") {
+        // ask employee related questions
+        inquirer.prompt(engQuestions).then(answers => {
+            console.log(answers.name);
+            console.log(answers.id);
+            console.log(answers.email);
+            console.log(answers.githubUserId);
+            const newEng = new Engineer(answers.name, answers.id, answers.email, answers.githubUserId);
+            arrOfEmpl.push(newEng);
+            wantToContinue();
+        });
+    }
+    else { // must be an Intern, so ask Intern related questions
         inquirer.prompt(internQuestions).then((answers) => {
             console.log(answers.name);
             console.log(answers.id);
             console.log(answers.email);
             console.log(answers.school);
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
+            arrOfEmpl.push(newIntern);
+            wantToContinue();
         });
-        }
-    })
-    // inquirer.prompt ({
-    //     type: 'confirm',
-    //     message: "Do you want to continue?(Hit enter for yes)",
-    //     name: 'moreEntries',
-    //     default: true
-    // }). then (response => {
-    //     if(!response.moreEntries)
-    //         moreEmp = false;
+    }
+}
 
-    //     console.log(response.moreEntries);
-    // })
+function wantToContinue() {
+    inquirer.prompt ({
+        type: 'confirm',
+        message: "Do you want to continue?(Hit enter for yes)",
+        name: 'moreEntries',
+        default: true
+    }). then (response => {
+        if(response.moreEntries)
+            init();
+        else {
+            const output = render(arrOfEmpl);
+            writeToFile(output);
+            //console.log(output)
+        }
+        //console.log(response.moreEntries);
+    })
+}
+
+function writeToFile(htmlContent) {
+
+    if (!fs.existsSync(OUTPUT_DIR)) {
+        console.log('Directory not found. Create one');
+        fs.mkdirSync(OUTPUT_DIR);
+    }
+
+    fs.writeFileSync(outputPath, htmlContent, { encoding:'utf8', flag:'w' })
+
+    // fs.writeFile(outputPath, htmlContent, err => {
+    //     if (err) 
+    //         return console.log("Could not write to file");
+    //     console.log('Successful!');
+    //   });
+
+    // if (!fs.existsSync(dir)){
+    //     fs.mkdirSync(dir);
+    // }
+
+    // try {
+    //     writeToFile(outputPath, htmlContent);
+    //     console.log("Successfull!");
+    // } catch(err) {
+    //     console.log(err);
+    // }
+}
 
 //}  // while
-}
+//}
 
 // After the user has input all employees desired, call the `render` function (required
 // above) and pass in an array containing all employee objects; the `render` function will
