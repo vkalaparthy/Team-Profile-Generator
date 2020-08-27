@@ -20,6 +20,15 @@ const validateTheResponse = async (input) => {
     return true;
 }
 
+const validateEmailresponse = async (input) => {
+    if (input === "") {
+        return 'Incorrect response!!';
+     } else if (!input.includes("@")) {
+        return 'Incorrect response!!';
+     }
+     return true;
+}
+
 const mgrQuestions = [
     {
         type: "input",
@@ -37,7 +46,7 @@ const mgrQuestions = [
         type: "input",
         message: "Enter email address",
         name: "email",
-        validate: validateTheResponse
+        validate: validateEmailresponse
     },
     {
         type: "input",
@@ -64,7 +73,7 @@ const engQuestions = [
         type: "input",
         message: "Enter email address",
         name: "email",
-        validate: validateTheResponse
+        validate: validateEmailresponse
     },
     {
         type: "input",
@@ -91,7 +100,7 @@ const internQuestions = [
         type: "input",
         message: "Enter email address",
         name: "email",
-        validate: validateTheResponse
+        validate: validateEmailresponse
     },
     {
         type: "input",
@@ -100,13 +109,10 @@ const internQuestions = [
         validate: validateTheResponse
     }
 ]
-// Write code to use inquirer to gather information about the development team members,
-// and to create objects for each team member (using the correct classes as blueprints!)
+
 const arrOfEmpl = [];
-let moreEmp = true;
 
 async function init() {
-//while (moreEmp) {
     const newEmployeeType = await inquirer.prompt([
         {
             type: "list",
