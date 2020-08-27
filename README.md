@@ -17,7 +17,7 @@ Run app.js at the terminal  using the command node app.js and a series of questi
 Answers collected from CLI interface are created as Objects and these objects render to html file for this team.  Generated "team.html" file is in output folder.  If there is no folder, this app will create a folder and create a team.html file.  If there is a already an existing team.html, this app will overwrite the file with new information.
 
 
-![Image of image](./images/TeamBuilt.jpg)
+![Image of image](./images/Capture.JPG)
 ## License
 
 ## Contributing
