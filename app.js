@@ -122,24 +122,22 @@ async function init() {
 
 }
 
- function askMoreQuestions(member) {
+ async function askMoreQuestions(member) {
 
     if (member === "Manager") {
         // ask manager related questions
-        inquirer.prompt(mgrQuestions).then(answers => {
-            if (Manager.count === 1) {
-                console.log("There is already a manager, can't create more");
-            } else {
-                console.log(answers.name);
-                console.log(answers.id);
-                console.log(answers.email);
-                console.log(answers.officeNumber);
-                const newMgr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
-                arrOfEmpl.push(newMgr);
-            }
-            wantToContinue();
-            //console.log(newMgr);
-        });
+        if (Manager.count === 1) {
+            console.log("There is already a manager, can't create more");
+        } else {
+            const answers = await inquirer.prompt(mgrQuestions);
+            console.log(answers.name);
+            console.log(answers.id);
+            console.log(answers.email);
+            console.log(answers.officeNumber);
+            const newMgr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
+            arrOfEmpl.push(newMgr);
+        }
+        wantToContinue();
     } else if (member === "Engineer") {
         // ask employee related questions
         inquirer.prompt(engQuestions).then(answers => {
@@ -192,22 +190,6 @@ function writeToFile(htmlContent) {
 
     fs.writeFileSync(outputPath, htmlContent, { encoding:'utf8', flag:'w' })
 
-    // fs.writeFile(outputPath, htmlContent, err => {
-    //     if (err) 
-    //         return console.log("Could not write to file");
-    //     console.log('Successful!');
-    //   });
-
-    // if (!fs.existsSync(dir)){
-    //     fs.mkdirSync(dir);
-    // }
-
-    // try {
-    //     writeToFile(outputPath, htmlContent);
-    //     console.log("Successfull!");
-    // } catch(err) {
-    //     console.log(err);
-    // }
 }
 
 init();
