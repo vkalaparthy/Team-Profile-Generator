@@ -22,9 +22,9 @@ const validateTheResponse = async (input) => {
 
 const validateEmailresponse = async (input) => {
     if (input === "") {
-        return 'Incorrect response!!';
-     } else if (!input.includes("@")) {
-        return 'Incorrect response!!';
+        return 'Incorrect email!!';
+     } else  if (! /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(input)) {
+        return 'Incorrect email!!';
      }
      return true;
 }
