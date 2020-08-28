@@ -14,6 +14,8 @@ This application is located at https://github.com/vkalaparthy/Team-Profile-Gener
 ## Usage
 Run app.js at the terminal  using the command node app.js and a series of questions will be asked to get the information about the team embers and their roles. The questions are based on roles of the employees and this app does not let you create more than one manager.
 
+![Image of image](./images/Questions.JPG)
+
 Answers collected from CLI interface are created as Objects and these objects render to html file for this team.  Generated "team.html" file is in output folder.  If there is no folder, this app will create a folder and create a team.html file.  If there is a already an existing team.html, this app will overwrite the file with new information.
 
 
