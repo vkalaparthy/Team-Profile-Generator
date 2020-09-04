@@ -121,13 +121,12 @@ async function init() {
             choices: ['Manager', 'Engineer', 'Intern']
         }
     ])
-
-    console.log(newEmployeeType.member);
-
     await askMoreQuestions(newEmployeeType.member);
 
 }
 
+// This is an async function to generate Objects based on role based on
+// used provided information.
  async function askMoreQuestions(member) {
 
     if (member === "Manager") {
@@ -136,10 +135,6 @@ async function init() {
             console.log("There is already a manager, can't create more");
         } else {
             const answers = await inquirer.prompt(mgrQuestions);
-            // console.log(answers.name);
-            // console.log(answers.id);
-            // console.log(answers.email);
-            // console.log(answers.officeNumber);
             const newMgr = new Manager(answers.name, answers.id, answers.email, answers.officeNumber);
             arrOfEmpl.push(newMgr);
         }
@@ -147,10 +142,6 @@ async function init() {
     } else if (member === "Engineer") {
         // ask employee related questions
         inquirer.prompt(engQuestions).then(answers => {
-            // console.log(answers.name);
-            // console.log(answers.id);
-            // console.log(answers.email);
-            // console.log(answers.githubUserId);
             const newEng = new Engineer(answers.name, answers.id, answers.email, answers.githubUserId);
             arrOfEmpl.push(newEng);
             wantToContinue();
@@ -158,10 +149,6 @@ async function init() {
     }
     else { // must be an Intern, so ask Intern related questions
         inquirer.prompt(internQuestions).then((answers) => {
-            // console.log(answers.name);
-            // console.log(answers.id);
-            // console.log(answers.email);
-            // console.log(answers.school);
             const newIntern = new Intern(answers.name, answers.id, answers.email, answers.school);
             arrOfEmpl.push(newIntern);
             wantToContinue();
@@ -169,6 +156,7 @@ async function init() {
     }
 }
 
+// This function is used to decide if user wants to create more employees for a team.
 function wantToContinue() {
     inquirer.prompt ({
         type: 'confirm',
@@ -183,14 +171,17 @@ function wantToContinue() {
             writeToFile(output);
             //console.log(output)
         }
-        //console.log(response.moreEntries);
     })
 }
 
+// In this function, a team.html file is generated in output directory, with
+// the information provided by the user.  Everytime app is run, a new team.html
+// will be generated(rendered)
+// If output directory does not exits, then it gets created.
 function writeToFile(htmlContent) {
 
     if (!fs.existsSync(OUTPUT_DIR)) {
-        console.log('Directory not found. Create one');
+        //console.log('Directory not found. Create one');
         fs.mkdirSync(OUTPUT_DIR);
     }
 
